@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>杂鱼 · 个人站</title>
+  <!-- Font Awesome 图标库 (免费) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      background-image:url("https://s.panlai.com/zb_users/upload/2026/08/bizhihui_com_202608211787295735255438.jpg-arthumbs");
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* 卡片 & 玻璃效果 */
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 15px 40px -12px rgba(0, 20, 30, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transition: 0.2s ease;
+      margin-bottom: 2rem;
+    }
+
+    .card:hover {
+      box-shadow: 0 25px 45px -18px rgba(0, 40, 60, 0.2);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    /* 头部 */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .avatar-name {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+      background: linear-gradient(145deg, #2b3c5a, #1d2a3f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f0e9d0;
+      font-size: 2.6rem;
+      font-weight: 500;
+      box-shadow: 0 8px 14px rgba(0,0,0,0.08);
+      border: 2px solid rgba(255,215,140,0.5);
+      flex-shrink: 0;
+    }
+
+    .title-group h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #0b1a2a;
+    }
+
+    .title-group .tagline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem 0.8rem;
+      margin-top: 0.2rem;
+    }
+
+    .tagline .badge {
+      background: #1e2a3a;
+      color: #f5efe0;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      background: #24344b;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.1);
+    }
+
+    .tagline .badge i {
+      margin-right: 6px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      color: #2a3d58;
+      font-size: 1.8rem;
+      transition: 0.2s;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.7);
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #1d2e44;
+      color: #f5f0e3;
+      transform: scale(1.05);
+      border-color: #b8c9e0;
+    }
+
+    /* 杂鱼宣言 */
+    .shoutout {
+      background: rgba(235, 215, 175, 0.2);
+      border-left: 6px solid #d9b382;
+      padding: 1rem 1.5rem;
+      border-radius: 40px 16px 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin: 0.5rem 0 0.2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .shoutout i {
+      color: #b57c48;
+      font-size: 1.5rem;
+    }
+
+    .shoutout span {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #2b3f4e;
+    }
+
+    .shoutout .highlight {
+      background: #2b3f4e;
+      color: #f5e8d0;
+      padding: 0.2rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-left: auto;
+    }
+
+    /* 网格布局 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 680px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .social-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .shoutout .highlight {
+        margin-left: 0;
+      }
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e3347;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.4rem;
+      border-bottom: 2px dashed rgba(70, 100, 130, 0.2);
+      padding-bottom: 0.5rem;
+    }
+
+    .section-title i {
+      color: #a57c5a;
+      font-size: 1.2rem;
+      width: 1.8rem;
+    }
+
+    /* 技能标签 */
+    .skill-tag {
+      display: inline-block;
+      background: #e7edf5;
+      padding: 0.3rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1b2c3e;
+      margin: 0.2rem 0.3rem 0.2rem 0;
+      border: 1px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(2px);
+      transition: 0.1s;
+    }
+
+    .skill-tag i {
+      margin-right: 6px;
+      color: #6d8aa8;
+    }
+
+    .project-item {
+      background: rgba(245, 248, 252, 0.5);
+      backdrop-filter: blur(2px);
+      border-radius: 24px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      transition: 0.15s;
+    }
+
+    .project-item:hover {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: #c0d0e0;
+    }
+
+    .project-item h4 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #1f3349;
+    }
+
+    .project-item h4 i {
+      color: #b58b61;
+      font-size: 1rem;
+    }
+
+    .project-item p {
+      font-size: 0.95rem;
+      color: #2d4057;
+      margin: 0.3rem 0 0.6rem;
+    }
+
+    .project-item .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+      font-size: 0.8rem;
+      color: #5f748b;
+    }
+
+    .meta i {
+      margin-right: 4px;
+      color: #8c6f50;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(100, 120, 150, 0.1);
+    }
+
+    .contact-item i {
+      width: 24px;
+      color: #3f5b78;
+      font-size: 1.2rem;
+    }
+
+    .contact-item a {
+      color: #1a2c40;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted transparent;
+      transition: 0.1s;
+    }
+
+    .contact-item a:hover {
+      border-bottom-color: #8b6f4e;
+      color: #0f1e2f;
+    }
+
+    /* 底部 */
+    .footer-note {
+      margin-top: 1.2rem;
+      text-align: center;
+      color: #60758b;
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(100, 120, 150, 0.15);
+      padding-top: 1.8rem;
+    }
+
+    .footer-note i {
+      color: #b5835a;
+    }
+
+    /* 杂鱼小彩蛋 */
+    .zayu-blink {
+      animation: pulseGlow 2.2s infinite;
+    }
+    @keyframes pulseGlow {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; text-shadow: 0 0 6px rgba(200, 160, 100, 0.3); }
+      100% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 卡片：头部 + 杂鱼宣言 -->
+  <div class="card">
+    <div class="header">
+      <div class="avatar-name">
+        <div class="avatar">🐟</div>
+        <div class="title-group">
+          <h1>杂鱼·阿鳍</h1>
+          <div class="tagline">
+            <span class="badge"><i class="fas fa-code"></i> 全栈摸鱼</span>
+            <span class="badge"><i class="fas fa-palette"></i> 设计乱炖</span>
+            <span class="badge"><i class="fas fa-gamepad"></i> 业余鸽王</span>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Bilibili"><i class="fab fa-bilibili"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <!-- 杂鱼宣言 + 该有的功能都有 -->
+    <div class="shoutout">
+      <i class="fas fa-fish"></i>
+      <span><strong>“杂鱼别刷了”</strong> 该有的功能都有</span>
+      <span class="highlight"><i class="fas fa-check-circle"></i> 已包含 · 全功能</span>
+    </div>
+  </div>
+
+  <!-- 两列布局：左列 (关于/技能/联系) + 右列 (项目/动态) -->
+  <div class="grid-2">
+
+    <!-- 左列 -->
+    <div>
+
+      <!-- 关于 -->
+      <div class="card">
+        <div class="section-title"><i class="fas fa-user-astronaut"></i> 关于 · 杂鱼</div>
+        <p style="margin-bottom: 1rem; font-weight: 400; color: #1f344a;">
+          一条在互联网海洋里扑腾的杂鱼。擅长用<strong>React</strong>和<strong>Vue</strong>搭建鱼塘，
+          偶尔用<strong>Python</strong>写写爬虫，没事画点矢量小鱼。
+          坚信“<i>杂鱼也有大海梦</i>”，目前正在努力把每一个业余项目变成能吹的牛皮。
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem;">
+          <span class="skill-tag"><i class="fab fa-react"></i> React</span>
+          <span class="skill-tag"><i class="fab fa-vuejs"></i> Vue</span>
+          <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
+          <span class="skill-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+          <span class="skill-tag"><i class="fas fa-cloud"></i> AWS</span>
+          <span class="skill-tag"><i class="fas fa-paint-brush"></i> Figma</span>
+          <span class="skill-tag"><i class="fas fa-fish"></i> 杂鱼学</span>
+        </div>
+      </div>
+
+      <!-- 联系 -->
+      <div class="card">
+        <div class="section-title"><i class="fas fa-address-card"></i> 联系 · 别刷了</div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:zayu@fishmail.dev">zayu@fishmail.dev</a>
+        </div>
+        <div class="contact-item">
+          <i class="fab fa-telegram"></i>
+          <a href="#">@zayu_fish</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-pin"></i>
+          <span>🌊 数字海洋 · 不定时浮出</span>
+        </div>
+        <div class="contact-item" style="border-bottom: none;">
+          <i class="fas fa-clock"></i>
+          <span>🕒 在线时间：随缘 (一般是深夜)</span>
+        </div>
+      </div>
+
+      <!-- 小彩蛋：杂鱼语录 -->
+      <div class="card" style="background: rgba(230, 215, 185, 0.2); border: 1px solid rgba(200,170,130,0.3);">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <i class="fas fa-quote-left" style="color:#b58b61; font-size: 1.6rem;"></i>
+          <span style="font-style: italic; color: #2a4058;"><span class="zayu-blink">🐟</span> 杂鱼虽小，五脏俱全 —— 该有的功能一个不少。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右列：项目 & 动态 -->
+    <div>
+
+      <!-- 项目区 -->
+      <div class="card">
+        <div class="section-title"><i class="fas fa-project-diagram"></i> 项目 · 鱼塘</div>
+
+        <div class="project-item">
+          <h4><i class="fas fa-fish"></i> 杂鱼社区 · 轻论坛</h4>
+          <p>用 Vue3 + Tailwind 构建的极简社区，支持发帖/评论/鱼苗认证。</p>
+          <div class="meta">
+            <span><i class="fas fa-code-branch"></i> Vue3 · Pinia</span>
+            <span><i class="fas fa-server"></i> Firebase</span>
+            <span><i class="fas fa-star" style="color: #d9b382;"></i> 38 ⭐</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <h4><i class="fas fa-robot"></i> 鱼酱 · Discord 机器人</h4>
+          <p>Python + discord.py，实现自动回复、小鱼表情包、运势抽签。</p>
+          <div class="meta">
+            <span><i class="fab fa-python"></i> Python</span>
+            <span><i class="fas fa-database"></i> SQLite</span>
+            <span><i class="fas fa-users"></i> 120+ 服务器</span>
+          </div>
+        </div>
+
+        <div class="project-item">
+          <h4><i class="fas fa-palette"></i> 杂鱼设计稿 · Figma 组件</h4>
+          <p>开源 UI 套件，包含 40+ 移动端组件，专为“摸鱼风格”优化。</p>
+          <div class="meta">
+            <span><i class="fab fa-figma"></i> Figma</span>
+            <span><i class="fas fa-heart" style="color: #b58b61;"></i> 已复刻 12 次</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 0.2rem; font-size: 0.9rem; color: #4a617a; display: flex; gap: 8px; flex-wrap: wrap;">
+          <span><i class="fas fa-plus-circle"></i> 更多鱼塘项目施工中…</span>
+        </div>
+      </div>
+
+      <!-- 动态 / 小功能 -->
+      <div class="card">
+        <div class="section-title"><i class="fas fa-rss"></i> 动态 · 摸鱼日志</div>
+        <ul style="list-style: none; padding: 0;">
+          <li style="display: flex; gap: 12px; margin-bottom: 0.9rem; align-items: flex-start;">
+            <i class="fas fa-code" style="color: #4d6a87; margin-top: 0.2rem;"></i>
+            <div><strong>重构个人站</strong> — 加了玻璃效果和杂鱼宣言，现在该有的功能都有了。</div>
+          </li>
+          <li style="display: flex; gap: 12px; margin-bottom: 0.9rem; align-items: flex-start;">
+            <i class="fas fa-paint-brush" style="color: #4d6a87; margin-top: 0.2rem;"></i>
+            <div><strong>设计系统 v2</strong> — 更新了杂鱼配色，新增“摸鱼灰”和“鱼鳍蓝”。</div>
+          </li>
+          <li style="display: flex; gap: 12px; margin-bottom: 0.9rem; align-items: flex-start;">
+            <i class="fas fa-gamepad" style="color: #4d6a87; margin-top: 0.2rem;"></i>
+            <div><strong>周末鱼塘赛</strong> — 组织了一场小游戏比赛，奖品是杂鱼徽章。</div>
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <i class="fas fa-coffee" style="color: #4d6a87; margin-top: 0.2rem;"></i>
+            <div><strong>今日摸鱼</strong> — 喝了一杯咖啡，看了两篇论文，写了三行代码。</div>
+          </li>
+        </ul>
+        <div style="margin-top: 1rem; background: rgba(180, 200, 220, 0.15); padding: 0.6rem 1rem; border-radius: 30px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem;">
+          <i class="fas fa-fish" style="color: #b5835a;"></i>
+          <span>🐟 杂鱼提示：别刷了，去写代码吧！</span>
+        </div>
+      </div>
+
+    </div> <!-- 右列结束 -->
+  </div> <!-- grid-2 结束 -->
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    <i class="fas fa-fish"></i> 杂鱼·阿鳍 · 该有的功能都有了 · 2026 <i class="fas fa-water" style="margin:0 6px;"></i> 别刷了，再看也是杂鱼
+  </div>
+</div> <!-- container -->
+</body>
+</html>
